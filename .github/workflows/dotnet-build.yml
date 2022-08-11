@@ -1,0 +1,39 @@
+name: .NET Build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    name: Build ${{ matrix.project }}-${{ matrix.configuration }}-${{ matrix.framework }}
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        framework: ['netstandard2.1','net6.0']
+        project: ['BetterCallSodium']
+        configuration: ['Release','Debug']
+    timeout-minutes: 30
+
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+    steps:
+    - uses: actions/checkout@v2.4.0
+      
+    - name: Setup .Net
+      uses: actions/setup-dotnet@v1.9.0
+      with:
+        dotnet-version: 6.0
+      
+    - name: Restore
+      run: dotnet restore
+      
+    - name: Build ${{ matrix.project }}-${{ matrix.configuration }}-${{ matrix.framework }}
+      run: dotnet publish -c ${{ matrix.configuration }} -f ${{ matrix.framework }} ${{ matrix.project }}
+      
+    - name: Upload ${{ matrix.project }}-${{ matrix.configuration }}-${{ matrix.framework }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ matrix.project }}-${{ matrix.configuration }}-${{ matrix.framework }}
+        path: ${{ github.workspace }}/${{ matrix.project }}/bin/${{ matrix.configuration }}/${{ matrix.framework }}/publish
