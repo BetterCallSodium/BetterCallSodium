@@ -1,0 +1,44 @@
+name: .NET Tests
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    name: Test on ${{ matrix.os }} ${{ matrix.arch }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+        arch: ['x86', 'x64']
+        exclude: 
+        - os: ubuntu-latest
+          arch: 'x86'
+        - os: macos-latest
+          arch: 'x86'
+        include: 
+        - os: windows-latest
+          target: win
+        - os: ubuntu-latest
+          target: linux
+        - os: macos-latest
+          target: osx
+    timeout-minutes: 30
+
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+    steps:
+    - uses: actions/checkout@v2.4.0
+      
+    - name: Setup .Net
+      uses: actions/setup-dotnet@v1.9.0
+      with:
+        dotnet-version: 6.0
+      
+    - name: Restore
+      run: dotnet restore --runtime ${{ matrix.target }}-${{ matrix.arch }}
+      
+    - name: Test
+      run: dotnet test --runtime ${{ matrix.target }}-${{ matrix.arch }}
