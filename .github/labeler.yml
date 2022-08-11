@@ -1,0 +1,12 @@
+meta:
+ - .github/**/*
+ - .editorconfig
+ - .gitattributes
+ - .gitignore
+ - LICENSE.md
+ - README.md
+library:
+ - BetterCallSodium/**/*
+ - BetterCallSodium.sln
+tests:
+ - BetterCallSodium.Tests/**/*
