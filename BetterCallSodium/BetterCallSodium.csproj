@@ -6,9 +6,10 @@
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-	<IsTrimmable>true</IsTrimmable>
-	<EnableTrimAnalyzer>true</EnableTrimAnalyzer>
-	<TrimmerSingleWarn>false</TrimmerSingleWarn>
+    <IsTrimmable>true</IsTrimmable>
+    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+    <EnableAOTAnalyzer>true</EnableAOTAnalyzer>
+    <TrimmerSingleWarn>false</TrimmerSingleWarn>
   </PropertyGroup>
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
