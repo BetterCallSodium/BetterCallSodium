@@ -8,7 +8,7 @@ using System.Text;
 
 namespace BetterCallSodium.Tests
 {
-    internal class ProcessUtils
+    internal static class ProcessUtils
     {
         private static readonly object ConsoleEncodingLock = new();
         private static Encoding? _encodingCache;
@@ -39,6 +39,7 @@ namespace BetterCallSodium.Tests
 
                             if (cp <= 0)
                                 throw new InvalidOperationException();
+
                             _encodingCache = Encoding.GetEncoding(cp);
                             return _encodingCache;
                         }
@@ -53,6 +54,7 @@ namespace BetterCallSodium.Tests
 
                             if (codePage <= 0)
                                 throw new Win32Exception();
+
                             _encodingCache = Encoding.GetEncoding(codePage);
                             return _encodingCache;
                         }
@@ -115,17 +117,15 @@ namespace BetterCallSodium.Tests
             };
 
             process.Start();
-
             process.BeginOutputReadLine();
             process.BeginErrorReadLine();
-
             process.WaitForExit();
 
             lock (outputLock)
                 output = outputBuilder.ToString().Trim();
-
             lock (errorLock)
                 error = errorBuilder.ToString().Trim();
+
             return process.ExitCode;
         }
     }
