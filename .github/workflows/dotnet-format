@@ -1,0 +1,28 @@
+name: .NET Format
+
+on: [push, pull_request]
+
+jobs:
+  format:
+
+    name: Check formatting
+    runs-on: windows-latest
+    timeout-minutes: 30
+
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+    steps:
+    - uses: actions/checkout@v2.4.0
+      
+    - name: Setup .Net
+      uses: actions/setup-dotnet@v2.1.0
+      with:
+        dotnet-version: '6.0.x'
+      
+    - name: Restore
+      run: dotnet restore
+      
+    - name: Check formatting
+      run: dotnet format --verify-no-changes
