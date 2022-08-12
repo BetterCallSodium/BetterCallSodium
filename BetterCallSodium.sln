@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterCallSodium", "BetterCallSodium\BetterCallSodium.csproj", "{A215A0A6-51C6-4CD5-8CD7-37D96D15DF8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BetterCallSodium", "BetterCallSodium\BetterCallSodium.csproj", "{A215A0A6-51C6-4CD5-8CD7-37D96D15DF8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterCallSodium.Tests", "BetterCallSodium.Tests\BetterCallSodium.Tests.csproj", "{BB48D796-D8A4-4C5E-BC83-8EA11001D1CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BetterCallSodium.Tests", "BetterCallSodium.Tests\BetterCallSodium.Tests.csproj", "{BB48D796-D8A4-4C5E-BC83-8EA11001D1CC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7A983927-B8B8-4E58-8E72-340634B84DE1}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A215A0A6-51C6-4CD5-8CD7-37D96D15DF8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -24,5 +26,11 @@ Global
 		{BB48D796-D8A4-4C5E-BC83-8EA11001D1CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB48D796-D8A4-4C5E-BC83-8EA11001D1CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB48D796-D8A4-4C5E-BC83-8EA11001D1CC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7926E500-C8FB-41B5-A056-FEDE0759AF1B}
 	EndGlobalSection
 EndGlobal
