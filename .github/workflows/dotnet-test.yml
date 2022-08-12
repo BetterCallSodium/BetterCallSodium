@@ -41,4 +41,5 @@ jobs:
       run: dotnet restore --runtime ${{ matrix.target }}-${{ matrix.arch }}
       
     - name: Test
-      run: dotnet test --logger "console;verbosity=detailed" --runtime ${{ matrix.target }}-${{ matrix.arch }}
+      run: dotnet test --logger "console;verbosity=detailed" --arch ${{ matrix.arch }}
+      
