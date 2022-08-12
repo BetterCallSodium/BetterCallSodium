@@ -33,7 +33,7 @@ jobs:
       run: dotnet publish -c ${{ matrix.configuration }} -f ${{ matrix.framework }} ${{ matrix.project }}
       
     - name: Upload ${{ matrix.project }}-${{ matrix.configuration }}-${{ matrix.framework }}
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: ${{ matrix.project }}-${{ matrix.configuration }}-${{ matrix.framework }}
         path: ${{ github.workspace }}/${{ matrix.project }}/bin/${{ matrix.configuration }}/${{ matrix.framework }}/publish
