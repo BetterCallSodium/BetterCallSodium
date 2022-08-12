@@ -3,7 +3,7 @@ name: .NET Tests
 on: [push, pull_request]
 
 jobs:
-  build:
+  test:
 
     name: Test on ${{ matrix.os }} ${{ matrix.arch }}
     runs-on: ${{ matrix.os }}
