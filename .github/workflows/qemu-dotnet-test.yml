@@ -34,7 +34,9 @@ jobs:
           install: |
             case "${{ matrix.distro }}" in
               ubuntu*)
-                curl -o packages-microsoft-prod.deb https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
+                apt-get update -y
+                apt-get install -y wget
+                wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
                 dpkg -i packages-microsoft-prod.deb
                 rm packages-microsoft-prod.deb
                 apt-get update -y
