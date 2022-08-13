@@ -51,4 +51,4 @@ jobs:
             esac
 
           run: |
-            dotnet test
+            dotnet test --logger "console;verbosity=detailed"
