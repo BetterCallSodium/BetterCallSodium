@@ -50,9 +50,9 @@ jobs:
             chmod 777 dotnet-install.sh
             ./dotnet-install.sh -c 6.0
             rm dotnet-install.sh
-            echo 'export DOTNET_ROOT=$HOME/.dotnet' >> ~/.bashrc
-            echo 'export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools' >> ~/.bashrc
 
           run: |
+            export DOTNET_ROOT=$HOME/.dotnet
+            export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
             dotnet restore
             dotnet test --logger "console;verbosity=detailed"
