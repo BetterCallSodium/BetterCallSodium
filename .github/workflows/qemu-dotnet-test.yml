@@ -1,3 +1,4 @@
+name: .NET QEMU Tests
 on: [push, pull_request]
 
 jobs:
