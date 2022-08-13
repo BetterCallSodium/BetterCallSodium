@@ -46,7 +46,7 @@ jobs:
                 apk add bash icu-libs icu-data-full krb5-libs libgcc libintl libssl1.1 libstdc++ zlib
                 ;;
             esac
-            wget -O dotnet-install.sh https://dot.net/v1/dotnet-install.sh --ca-directory=/etc/ssl/certs/
+            wget -O dotnet-install.sh https://dot.net/v1/dotnet-install.sh
             chmod 777 dotnet-install.sh
             ./dotnet-install.sh -c 6.0
             rm dotnet-install.sh
