@@ -46,7 +46,7 @@ jobs:
                 apk add curl bash icu-libs icu-data-full krb5-libs libgcc libintl libssl1.1 libstdc++ zlib
                 ;;
             esac
-            curl -o dotnet-install.sh https://dot.net/v1/dotnet-install.sh
+            curl https://dot.net/v1/dotnet-install.sh --output dotnet-install.sh
             chmod 777 dotnet-install.sh
             ./dotnet-install.sh -c 6.0
             rm dotnet-install.sh
