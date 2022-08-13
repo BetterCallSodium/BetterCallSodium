@@ -20,10 +20,12 @@ namespace BetterCallSodium.Tests
         public void VerifyTest()
         {
             int exitCode = ProcessUtils.GetProcessOutput("dotnet", "tool restore", out string output, out string error);
+
             if (!string.IsNullOrWhiteSpace(output))
                 _output.WriteLine($"Restore output: {output}");
             if (!string.IsNullOrWhiteSpace(error))
                 _output.WriteLine($"Restore error: {error}");
+
             Assert.Equal(0, exitCode);
 
             string references = "";
@@ -32,10 +34,12 @@ namespace BetterCallSodium.Tests
 
             string arguments = $"ilverify \"{typeof(MonoPInvokeCallbackAttribute).Assembly.Location}\" -s \"{typeof(object).Assembly.GetName().Name}\" {references}";
             exitCode = ProcessUtils.GetProcessOutput("dotnet", arguments, out output, out error);
+
             if (!string.IsNullOrWhiteSpace(output))
                 _output.WriteLine($"IlVerify output: {output}");
             if (!string.IsNullOrWhiteSpace(error))
                 _output.WriteLine($"IlVerify error: {error}");
+
             Assert.Equal(0, exitCode);
         }
     }
