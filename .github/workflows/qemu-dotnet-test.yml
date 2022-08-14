@@ -9,8 +9,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - arch: armv7
-            distro: bullseye
+          #- arch: armv7
+          #  distro: bullseye
           - arch: aarch64
             distro: bullseye
           - arch: aarch64
