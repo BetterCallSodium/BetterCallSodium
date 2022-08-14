@@ -40,7 +40,7 @@ jobs:
                 apt-get install -y wget openssl libgcc1 libicu67 libc6 libssl1.1 zlib1g libstdc++6 libgssapi-krb5-2
                 ;;
               fedora*)
-                dnf install -y dotnet-sdk-6.0
+                dnf install -y dotnet-sdk-6.0 wget
                 ;;
               alpine*)
                 apk update
@@ -48,7 +48,7 @@ jobs:
                 apk add bash icu-libs icu-data-full krb5-libs libgcc libintl libssl1.1 libstdc++ zlib
                 ;;
             esac
-            if [ "${{ matrix.distro }}" != "fedora-latest" ]; then
+            if [ "${{ matrix.distro }}" != "fedora_latest" ]; then
               wget -O dotnet-install.sh https://dot.net/v1/dotnet-install.sh
               chmod 777 dotnet-install.sh
               ./dotnet-install.sh -c 6.0
@@ -56,7 +56,7 @@ jobs:
             fi
 
           run: |
-            if [ "${{ matrix.distro }}" != "fedora-latest" ]; then
+            if [ "${{ matrix.distro }}" != "fedora_latest" ]; then
               export DOTNET_ROOT=$HOME/.dotnet
               export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
             fi
