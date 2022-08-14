@@ -13,6 +13,8 @@ jobs:
             distro: bullseye
           - arch: aarch64
             distro: alpine_latest
+          - arch: s390x
+            distro: fedora_latest
 
     steps:
       - uses: actions/checkout@v2.1.0
@@ -37,19 +39,26 @@ jobs:
                 apt-get update -y
                 apt-get install -y wget openssl libgcc1 libicu67 libc6 libssl1.1 zlib1g libstdc++6 libgssapi-krb5-2
                 ;;
+              fedora*)
+                dnf install dotnet-sdk-6.0
+                ;;
               alpine*)
                 apk update
                 apk add libgdiplus --repository https://dl-3.alpinelinux.org/alpine/edge/testing/
                 apk add bash icu-libs icu-data-full krb5-libs libgcc libintl libssl1.1 libstdc++ zlib
                 ;;
             esac
-            wget -O dotnet-install.sh https://dot.net/v1/dotnet-install.sh
-            chmod 777 dotnet-install.sh
-            ./dotnet-install.sh -c 6.0
-            rm dotnet-install.sh
+            if [ "${{ matrix.distro }}" != "fedora-latest" ]; then
+              wget -O dotnet-install.sh https://dot.net/v1/dotnet-install.sh
+              chmod 777 dotnet-install.sh
+              ./dotnet-install.sh -c 6.0
+              rm dotnet-install.sh
+            fi
 
           run: |
-            export DOTNET_ROOT=$HOME/.dotnet
-            export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
+            if [ "${{ matrix.distro }}" != "fedora-latest" ]; then
+              export DOTNET_ROOT=$HOME/.dotnet
+              export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
+            fi
             dotnet restore
             dotnet test --logger "console;verbosity=detailed"
