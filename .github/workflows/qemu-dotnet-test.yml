@@ -40,7 +40,7 @@ jobs:
                 apt-get install -y wget openssl libgcc1 libicu67 libc6 libssl1.1 zlib1g libstdc++6 libgssapi-krb5-2
                 ;;
               fedora*)
-                dnf install dotnet-sdk-6.0
+                dnf install -y dotnet-sdk-6.0
                 ;;
               alpine*)
                 apk update
