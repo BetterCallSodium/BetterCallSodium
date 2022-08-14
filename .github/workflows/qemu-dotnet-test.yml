@@ -53,5 +53,6 @@ jobs:
           run: |
             export DOTNET_ROOT=$HOME/.dotnet
             export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
+            ls -l /root/.dotnet/host/fxr
             dotnet restore
             dotnet test --logger "console;verbosity=detailed"
