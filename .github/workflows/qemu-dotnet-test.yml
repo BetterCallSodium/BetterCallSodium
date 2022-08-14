@@ -10,9 +10,9 @@ jobs:
       matrix:
         include:
           - arch: armv7
-            distro: ubuntu20.04
+            distro: bullseye
           - arch: aarch64
-            distro: ubuntu20.04
+            distro: bullseye
           - arch: aarch64
             distro: alpine_latest
 
@@ -33,7 +33,7 @@ jobs:
           shell: /bin/bash
           install: |
             case "${{ matrix.distro }}" in
-              ubuntu*)
+              bullseye)
                 apt-get update -y
                 apt-get install -y apt-utils ca-certificates apt-transport-https
                 apt-get update -y
