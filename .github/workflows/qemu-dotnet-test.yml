@@ -37,7 +37,7 @@ jobs:
                 apt-get update -y
                 apt-get install -y apt-utils ca-certificates apt-transport-https
                 apt-get update -y
-                apt-get install -y wget openssl libgcc1 libicu66 libc6 libssl1.1 zlib1g libstdc++6 libgssapi-krb5-2
+                apt-get install -y wget openssl libgcc1 libicu67 libc6 libssl1.1 zlib1g libstdc++6 libgssapi-krb5-2
                 if [ "${{ matrix.arch }}" == "armv7" ]; then
                   for i in /etc/ssl/certs/*.pem; do HASH=$(openssl x509 -hash -noout -in $i); ln -s $(basename $i) /etc/ssl/certs/$HASH.0; done
                 fi
