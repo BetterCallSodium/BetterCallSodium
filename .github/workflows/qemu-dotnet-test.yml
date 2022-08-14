@@ -10,7 +10,7 @@ jobs:
       matrix:
         include:
           - arch: s390x
-            distro: bullseye
+            distro: alpine_latest
           - arch: aarch64
             distro: bullseye
           - arch: aarch64
