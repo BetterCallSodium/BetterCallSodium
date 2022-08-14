@@ -13,6 +13,8 @@ jobs:
           #  distro: bullseye
           - arch: aarch64
             distro: bullseye
+          - arch: armv7
+            distro: alpine_latest
           - arch: aarch64
             distro: alpine_latest
 
