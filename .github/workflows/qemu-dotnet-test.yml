@@ -9,6 +9,8 @@ jobs:
     strategy:
       matrix:
         include:
+          - arch: s390x
+            distro: bullseye
           - arch: aarch64
             distro: bullseye
           - arch: aarch64
