@@ -55,7 +55,7 @@ jobs:
                 ;;
             esac
             if [ "${{ matrix.distro }}" != "fedora_latest" ]; then
-              curl -o dotnet-install.sh https://dot.net/v1/dotnet-install.sh
+              curl -O https://dot.net/v1/dotnet-install.sh
               chmod 777 dotnet-install.sh
               ./dotnet-install.sh -c 6.0
               rm dotnet-install.sh
