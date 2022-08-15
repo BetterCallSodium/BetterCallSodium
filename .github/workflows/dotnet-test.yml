@@ -40,7 +40,7 @@ jobs:
       name: Install libsodium
       run: |
         sudo apt-get update -y
-        sudo apt-get install libsodium
+        sudo apt-get install -y libsodium
       
     - name: Restore
       run: dotnet restore --runtime ${{ matrix.target }}-${{ matrix.arch }}
