@@ -64,7 +64,11 @@ jobs:
               export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
             fi
             dotnet help
+            dotnet new xunit -o TestRestoreTemp
+            cd TestRestoreTemp/
             dotnet restore --runtime "${{ matrix.rid }}"
+            cd ..
+            rm -r TestRestoreTemp/
 
           run: |
             if [[ "${{ matrix.distro }}" != "fedora_latest" ]]; then
