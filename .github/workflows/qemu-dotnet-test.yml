@@ -64,7 +64,7 @@ jobs:
                 apk add curl bash icu-libs icu-data-full krb5-libs libgcc libintl libssl1.1 libstdc++ zlib
                 ;;
             esac
-            if [ "${{ matrix.distro }}" != "fedora_latest" && "${{ matrix.distro }}" != "alt_latest" ]; then
+            if [[ "${{ matrix.distro }}" != "fedora_latest" && "${{ matrix.distro }}" != "alt_latest" ]]; then
               curl -L -O https://dot.net/v1/dotnet-install.sh
               chmod 777 dotnet-install.sh
               ./dotnet-install.sh -c 6.0
@@ -72,7 +72,7 @@ jobs:
             fi
 
           run: |
-            if [ "${{ matrix.distro }}" != "fedora_latest" && "${{ matrix.distro }}" != "alt_latest" ]; then
+            if [[ "${{ matrix.distro }}" != "fedora_latest" && "${{ matrix.distro }}" != "alt_latest" ]]; then
               export DOTNET_ROOT=$HOME/.dotnet
               export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
             fi
