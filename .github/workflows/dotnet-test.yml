@@ -36,7 +36,7 @@ jobs:
       with:
         dotnet-version: '6.0.x'
 
-    - if: ${{ matrix.target }} == ubuntu-latest
+    - if: matrix.os == 'ubuntu-latest'
       name: Install libsodium
       run: |
         sudo apt-get update -y
