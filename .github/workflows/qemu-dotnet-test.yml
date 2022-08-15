@@ -43,7 +43,7 @@ jobs:
                 ;;
               alt*)
                 apt-get update -y
-                apt-get install -y apt-utils ca-certificates apt-transport-https
+                apt-get install -y apt-utils ca-certificates
                 apt-get update -y
                 apt-get install -y curl dotnet
                 ;;
