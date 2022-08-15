@@ -45,7 +45,7 @@ jobs:
                 apt-get update -y
                 apt-get install -y apt-utils ca-certificates
                 apt-get update -y
-                apt-get install -y curl openssl libgcc1 icu libssl1.1 zlib libstdc++6 krb5
+                apt-get install -y curl openssl libgcc1 icu libssl1.1 zlib libstdc++6 libgssapi-krb5 grep awk tar gzip xz
                 ;;
               arch*)
                 pacman -Syy
