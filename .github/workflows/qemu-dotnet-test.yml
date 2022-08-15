@@ -14,7 +14,7 @@ jobs:
           - arch: aarch64
             distro: alpine_latest
           - arch: armv7
-            distro: centos_latest
+            distro: alt_latest
           - arch: s390x
             distro: fedora_latest
 
@@ -41,6 +41,12 @@ jobs:
                 apt-get update -y
                 apt-get install -y curl openssl libgcc1 libicu67 libc6 libssl1.1 zlib1g libstdc++6 libgssapi-krb5-2
                 ;;
+              alt*)
+                apt-get update -y
+                apt-get install -y apt-utils ca-certificates apt-transport-https
+                apt-get update -y
+                apt-get install -y curl dotnet
+                ;;
               arch*)
                 pacman -Syy
                 pacman --noconfirm -S curl openssl glibc gcc-libs icu libunwind zlib libgssapi_krb5.so ca-certificates gnutls grep awk tar gzip xz
@@ -58,7 +64,7 @@ jobs:
                 apk add curl bash icu-libs icu-data-full krb5-libs libgcc libintl libssl1.1 libstdc++ zlib
                 ;;
             esac
-            if [ "${{ matrix.distro }}" != "fedora_latest" ]; then
+            if [ "${{ matrix.distro }}" != "fedora_latest" && "${{ matrix.distro }}" != "alt_latest" ]; then
               curl -L -O https://dot.net/v1/dotnet-install.sh
               chmod 777 dotnet-install.sh
               ./dotnet-install.sh -c 6.0
@@ -66,7 +72,7 @@ jobs:
             fi
 
           run: |
-            if [ "${{ matrix.distro }}" != "fedora_latest" ]; then
+            if [ "${{ matrix.distro }}" != "fedora_latest" && "${{ matrix.distro }}" != "alt_latest" ]; then
               export DOTNET_ROOT=$HOME/.dotnet
               export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
             fi
