@@ -39,23 +39,23 @@ jobs:
                 apt-get update -y
                 apt-get install -y apt-utils ca-certificates apt-transport-https
                 apt-get update -y
-                apt-get install -y wget openssl libgcc1 libicu67 libc6 libssl1.1 zlib1g libstdc++6 libgssapi-krb5-2
+                apt-get install -y curl wget openssl libgcc1 libicu67 libc6 libssl1.1 zlib1g libstdc++6 libgssapi-krb5-2
                 ;;
               arch*)
                 pacman -Syy
-                pacman --noconfirm -S wget openssl glibc gcc-libs icu libunwind zlib libgssapi_krb5.so ca-certificates gnutls
+                pacman --noconfirm -S curl wget openssl glibc gcc-libs icu libunwind zlib libgssapi_krb5.so ca-certificates gnutls
                 ;;
               fedora*)
-                dnf install -y dotnet-sdk-6.0 wget
+                dnf install -y curl dotnet-sdk-6.0 wget
                 ;;
               alpine*)
                 apk update
                 apk add libgdiplus --repository https://dl-3.alpinelinux.org/alpine/edge/testing/
-                apk add bash icu-libs icu-data-full krb5-libs libgcc libintl libssl1.1 libstdc++ zlib
+                apk add curl bash icu-libs icu-data-full krb5-libs libgcc libintl libssl1.1 libstdc++ zlib
                 ;;
             esac
             if [ "${{ matrix.distro }}" != "fedora_latest" ]; then
-              wget -O dotnet-install.sh https://dot.net/v1/dotnet-install.sh
+              curl -o dotnet-install.sh https://dot.net/v1/dotnet-install.sh
               chmod 777 dotnet-install.sh
               ./dotnet-install.sh -c 6.0
               rm dotnet-install.sh
