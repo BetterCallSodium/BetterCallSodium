@@ -13,15 +13,13 @@ jobs:
             distro: bullseye
           - arch: aarch64
             distro: alpine_latest
-          - arch: armv7
-            distro: alt_latest
           - arch: s390x
             distro: fedora_latest
 
     steps:
       - uses: actions/checkout@v2.1.0
       
-      - uses: BetterCallSodium/run-on-arch-action@v2.0.1
+      - uses: uraimo/run-on-arch-action@v2.2.0
         name: Test
         with:
           arch: ${{ matrix.arch }}
@@ -41,19 +39,9 @@ jobs:
                 apt-get update -y
                 apt-get install -y curl openssl libgcc1 libicu67 libc6 libssl1.1 zlib1g libstdc++6 libgssapi-krb5-2
                 ;;
-              alt*)
-                apt-get update -y
-                apt-get install -y apt-utils ca-certificates
-                apt-get update -y
-                apt-get install -y curl openssl libgcc1 icu libssl1.1 zlib libstdc++6 libkrb5 grep awk tar gzip xz
-                ;;
               arch*)
                 pacman -Syy
                 pacman --noconfirm -S curl openssl glibc gcc-libs icu libunwind zlib libgssapi_krb5.so ca-certificates gnutls grep awk tar gzip xz
-                ;;
-              centos*)
-                rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
-                yum install curl dotnet-sdk-6.0
                 ;;
               fedora*)
                 dnf install -y curl dotnet-sdk-6.0
