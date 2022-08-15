@@ -39,14 +39,14 @@ jobs:
                 apt-get update -y
                 apt-get install -y apt-utils ca-certificates apt-transport-https
                 apt-get update -y
-                apt-get install -y curl wget openssl libgcc1 libicu67 libc6 libssl1.1 zlib1g libstdc++6 libgssapi-krb5-2
+                apt-get install -y curl openssl libgcc1 libicu67 libc6 libssl1.1 zlib1g libstdc++6 libgssapi-krb5-2
                 ;;
               arch*)
                 pacman -Syy
-                pacman --noconfirm -S curl wget openssl glibc gcc-libs icu libunwind zlib libgssapi_krb5.so ca-certificates gnutls
+                pacman --noconfirm -S curl openssl glibc gcc-libs icu libunwind zlib libgssapi_krb5.so ca-certificates gnutls grep awk tar gzip xz-utils
                 ;;
               fedora*)
-                dnf install -y curl dotnet-sdk-6.0 wget
+                dnf install -y curl dotnet-sdk-6.0
                 ;;
               alpine*)
                 apk update
