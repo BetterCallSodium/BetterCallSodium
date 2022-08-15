@@ -11,10 +11,13 @@ jobs:
         include:
           - arch: aarch64
             distro: bullseye
+            rid: debian-arm64
           - arch: aarch64
             distro: alpine_latest
+            rid: alpine-arm64
           - arch: s390x
             distro: fedora_latest
+            rid: linux-s390x
 
     steps:
       - uses: actions/checkout@v2.1.0
@@ -61,11 +64,12 @@ jobs:
               export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
             fi
             dotnet help
+            dotnet restore --runtime "${{ matrix.rid }}"
 
           run: |
             if [[ "${{ matrix.distro }}" != "fedora_latest" ]]; then
               export DOTNET_ROOT=$HOME/.dotnet
               export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
             fi
-            dotnet restore
+            dotnet restore --runtime "${{ matrix.rid }}"
             dotnet test --logger "console;verbosity=detailed"
