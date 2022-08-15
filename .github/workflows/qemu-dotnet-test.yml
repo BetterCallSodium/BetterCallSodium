@@ -58,6 +58,7 @@ jobs:
               ./dotnet-install.sh -c 6.0
               rm dotnet-install.sh
             fi
+            dotnet help
 
           run: |
             if [[ "${{ matrix.distro }}" != "fedora_latest" ]]; then
