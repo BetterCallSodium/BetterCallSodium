@@ -17,7 +17,7 @@ jobs:
             rid: alpine-arm64
           - arch: s390x
             distro: fedora_latest
-            rid: linux-s390x
+            rid: linux
 
     steps:
       - uses: actions/checkout@v2.1.0
