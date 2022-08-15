@@ -43,7 +43,7 @@ jobs:
                 ;;
               arch*)
                 pacman -Syy
-                pacman --noconfirm -S curl openssl glibc gcc-libs icu libunwind zlib libgssapi_krb5.so ca-certificates gnutls grep awk tar gzip xz-utils
+                pacman --noconfirm -S curl openssl glibc gcc-libs icu libunwind zlib libgssapi_krb5.so ca-certificates gnutls grep awk tar gzip xz
                 ;;
               fedora*)
                 dnf install -y curl dotnet-sdk-6.0
