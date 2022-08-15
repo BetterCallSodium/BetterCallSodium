@@ -43,7 +43,7 @@ jobs:
                 ;;
               arch*)
                 pacman -Syy
-                pacman --noconfirm -S wget openssl glibc gcc-libs icu libunwind zlib libgssapi_krb5.so
+                pacman --noconfirm -S wget openssl glibc gcc-libs icu libunwind zlib libgssapi_krb5.so ca-certificates
                 ;;
               fedora*)
                 dnf install -y dotnet-sdk-6.0 wget
