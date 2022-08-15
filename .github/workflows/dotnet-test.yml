@@ -39,8 +39,8 @@ jobs:
     - if: ${{ matrix.target }} == ubuntu-latest
       name: Install libsodium
       run: |
-        apt-get update -y
-        apt-get install libsodium
+        sudo apt-get update -y
+        sudo apt-get install libsodium
       
     - name: Restore
       run: dotnet restore --runtime ${{ matrix.target }}-${{ matrix.arch }}
