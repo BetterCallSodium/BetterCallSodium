@@ -14,14 +14,14 @@ jobs:
           - arch: aarch64
             distro: alpine_latest
           - arch: armv7
-            distro: archarm_latest
+            distro: centos_latest
           - arch: s390x
             distro: fedora_latest
 
     steps:
       - uses: actions/checkout@v2.1.0
       
-      - uses: uraimo/run-on-arch-action@v2
+      - uses: BetterCallSodium/run-on-arch-action@v2
         name: Test
         with:
           arch: ${{ matrix.arch }}
@@ -44,6 +44,10 @@ jobs:
               arch*)
                 pacman -Syy
                 pacman --noconfirm -S curl openssl glibc gcc-libs icu libunwind zlib libgssapi_krb5.so ca-certificates gnutls grep awk tar gzip xz
+                ;;
+              centos*)
+                rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
+                yum install curl dotnet-sdk-6.0
                 ;;
               fedora*)
                 dnf install -y curl dotnet-sdk-6.0
