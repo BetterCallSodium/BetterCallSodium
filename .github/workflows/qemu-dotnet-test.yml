@@ -1,0 +1,78 @@
+name: .NET QEMU Tests
+on: [push, pull_request]
+
+jobs:
+  test_qemu:
+    runs-on: ubuntu-latest
+    name: Test on ${{ matrix.distro }} ${{ matrix.arch }}
+
+    strategy:
+      matrix:
+        include:
+          - arch: aarch64
+            distro: bullseye
+            rid: debian-arm64
+          - arch: aarch64
+            distro: alpine_latest
+            rid: alpine-arm64
+          - arch: s390x
+            distro: fedora_latest
+            rid: linux
+
+    steps:
+      - uses: actions/checkout@v2.1.0
+      
+      - uses: uraimo/run-on-arch-action@v2.2.0
+        name: Test
+        with:
+          arch: ${{ matrix.arch }}
+          distro: ${{ matrix.distro }}
+          githubToken: ${{ github.token }}
+
+          env: |
+            DOTNET_NOLOGO: true
+            DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+          shell: /bin/bash
+          install: |
+            case "${{ matrix.distro }}" in
+              ubuntu*|jessie|stretch|buster|bullseye)
+                apt-get update -y
+                apt-get install -y apt-utils ca-certificates apt-transport-https
+                apt-get update -y
+                apt-get install -y curl openssl libgcc1 libicu67 libc6 libssl1.1 zlib1g libstdc++6 libgssapi-krb5-2 libsodium23
+                ;;
+              arch*)
+                pacman -Syy
+                pacman --noconfirm -S curl openssl glibc gcc-libs icu libunwind zlib libgssapi_krb5.so ca-certificates gnutls grep awk tar gzip xz
+                ;;
+              fedora*)
+                dnf install -y curl dotnet-sdk-6.0 libsodium
+                ;;
+              alpine*)
+                apk update
+                apk add libgdiplus --repository https://dl-3.alpinelinux.org/alpine/edge/testing/
+                apk add curl bash icu-libs icu-data-full krb5-libs libgcc libintl libssl1.1 libstdc++ zlib libsodium
+                ;;
+            esac
+            if [[ "${{ matrix.distro }}" != "fedora_latest" ]]; then
+              curl -L -O https://dot.net/v1/dotnet-install.sh
+              chmod 777 dotnet-install.sh
+              ./dotnet-install.sh -c 6.0
+              rm dotnet-install.sh
+              export DOTNET_ROOT=$HOME/.dotnet
+              export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
+            fi
+            dotnet new xunit -o TestRestoreTemp
+            cd TestRestoreTemp/
+            dotnet restore --runtime "${{ matrix.rid }}"
+            cd ..
+            rm -r TestRestoreTemp/
+
+          run: |
+            if [[ "${{ matrix.distro }}" != "fedora_latest" ]]; then
+              export DOTNET_ROOT=$HOME/.dotnet
+              export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
+            fi
+            dotnet restore --runtime "${{ matrix.rid }}"
+            dotnet test --logger "console;verbosity=detailed"
