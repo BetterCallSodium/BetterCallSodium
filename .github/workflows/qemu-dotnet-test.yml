@@ -63,7 +63,6 @@ jobs:
               export DOTNET_ROOT=$HOME/.dotnet
               export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
             fi
-            dotnet help
             dotnet new xunit -o TestRestoreTemp
             cd TestRestoreTemp/
             dotnet restore --runtime "${{ matrix.rid }}"
