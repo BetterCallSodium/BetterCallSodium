@@ -34,10 +34,7 @@ jobs:
     - name: Setup .Net
       uses: actions/setup-dotnet@v2.1.0
       with:
-        dotnet-version: |
-          6.0.x
-          7.0.x
-        include-prerelease: true
+        dotnet-version: '6.0.x'
 
     - if: matrix.os == 'ubuntu-latest'
       name: Install libsodium
@@ -49,4 +46,4 @@ jobs:
       run: dotnet restore --runtime ${{ matrix.target }}-${{ matrix.arch }}
       
     - name: Test
-      run: dotnet test --logger "console;verbosity=detailed" --arch ${{ matrix.arch }}
+      run: dotnet test --arch ${{ matrix.arch }}

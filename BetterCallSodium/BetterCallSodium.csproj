@@ -16,4 +16,22 @@
       <_Parameter1>$(AssemblyName).Tests</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
+  <Target Name="IlVerify" AfterTargets="Compile" Condition="'$(VerifyIL)' == 'true'">
+    <PropertyGroup>
+      <ILVerifyReferencePath>@(ReferencePath)</ILVerifyReferencePath>
+      <ILVerifySystemAssembly Condition="$(TargetFramework.StartsWith('netstandard'))">netstandard</ILVerifySystemAssembly>
+      <ILVerifySystemAssembly Condition="$(TargetFramework.StartsWith('net')) and !$(TargetFramework.StartsWith('netstandard'))">System.Runtime</ILVerifySystemAssembly>
+      <IlVerifyRsp>
+@(IntermediateAssembly)
+--statistics
+--sanity-checks
+--system-module:$(ILVerifySystemAssembly)
+--reference:&quot;$(ILVerifyReferencePath.Replace(';','&quot;%0a--reference:&quot;'))&quot;
+      </IlVerifyRsp>
+      <TempFileGuid>$([System.Guid]::NewGuid())</TempFileGuid>
+    </PropertyGroup>
+    <WriteLinesToFile File="ilverify.$(TargetFramework).$(TempFileGuid).rsp" Lines="$(IlVerifyRsp)" Overwrite="true" Encoding="UTF-8" />
+    <Exec Command="ilverify @ilverify.$(TargetFramework).$(TempFileGuid).rsp" />
+    <Delete Files="ilverify.$(TargetFramework).$(TempFileGuid).rsp" />
+  </Target>
 </Project>

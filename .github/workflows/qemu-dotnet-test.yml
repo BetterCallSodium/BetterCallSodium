@@ -59,7 +59,6 @@ jobs:
               curl -L -O https://dot.net/v1/dotnet-install.sh
               chmod 777 dotnet-install.sh
               ./dotnet-install.sh -c 6.0
-              ./dotnet-install.sh -c 7.0
               rm dotnet-install.sh
               export DOTNET_ROOT=$HOME/.dotnet
               export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
@@ -75,6 +74,5 @@ jobs:
               export DOTNET_ROOT=$HOME/.dotnet
               export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
             fi
-            dotnet --info
             dotnet restore --runtime "${{ matrix.rid }}"
             dotnet test --logger "console;verbosity=detailed"
