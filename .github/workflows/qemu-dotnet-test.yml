@@ -15,9 +15,6 @@ jobs:
           - arch: aarch64
             distro: alpine_latest
             rid: alpine-arm64
-          - arch: s390x
-            distro: fedora_latest
-            rid: linux
 
     steps:
       - uses: actions/checkout@v2.1.0
@@ -58,7 +55,6 @@ jobs:
             if [[ "${{ matrix.distro }}" != "fedora_latest" ]]; then
               curl -L -O https://dot.net/v1/dotnet-install.sh
               chmod 777 dotnet-install.sh
-              ./dotnet-install.sh -c 6.0
               ./dotnet-install.sh -c 7.0
               rm dotnet-install.sh
               export DOTNET_ROOT=$HOME/.dotnet
