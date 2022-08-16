@@ -75,5 +75,6 @@ jobs:
               export DOTNET_ROOT=$HOME/.dotnet
               export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
             fi
+            dotnet --info
             dotnet restore --runtime "${{ matrix.rid }}"
             dotnet test --logger "console;verbosity=detailed"
