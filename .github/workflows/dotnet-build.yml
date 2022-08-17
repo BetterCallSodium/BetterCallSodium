@@ -29,8 +29,11 @@ jobs:
     - name: Restore
       run: dotnet restore
       
+    - name: Install ilverify
+      run: dotnet tool install --global dotnet-ilverify
+      
     - name: Build ${{ matrix.project }}-${{ matrix.configuration }}-${{ matrix.framework }}
-      run: dotnet publish -c ${{ matrix.configuration }} -f ${{ matrix.framework }} ${{ matrix.project }}
+      run: dotnet publish -p:VerifyIL=true -c ${{ matrix.configuration }} -f ${{ matrix.framework }} ${{ matrix.project }}
       
     - name: Upload ${{ matrix.project }}-${{ matrix.configuration }}-${{ matrix.framework }}
       uses: actions/upload-artifact@v3
