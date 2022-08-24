@@ -12,9 +12,9 @@ jobs:
           - arch: aarch64
             distro: bullseye
             rid: debian-arm64
-          - arch: aarch64
-            distro: alpine_latest
-            rid: alpine-arm64
+          - arch: armv7
+            distro: bullseye
+            rid: debian-arm
 
     steps:
       - uses: actions/checkout@v2.1.0
