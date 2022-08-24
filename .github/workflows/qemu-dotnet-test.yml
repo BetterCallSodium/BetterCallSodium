@@ -10,11 +10,8 @@ jobs:
       matrix:
         include:
           - arch: aarch64
-            distro: bullseye
-            rid: debian-arm64
-          - arch: armv7
-            distro: bullseye
-            rid: debian-arm
+            distro: alpine-latest
+            rid: alpine-arm64
 
     steps:
       - uses: actions/checkout@v2.1.0
