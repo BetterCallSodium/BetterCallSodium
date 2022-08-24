@@ -10,7 +10,7 @@ jobs:
       matrix:
         include:
           - arch: aarch64
-            distro: alpine-latest
+            distro: alpine_latest
             rid: alpine-arm64
 
     steps:
