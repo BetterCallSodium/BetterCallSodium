@@ -10,8 +10,8 @@ jobs:
       matrix:
         include:
           - arch: aarch64
-            distro: alpine_latest
-            rid: alpine-arm64
+            distro: bullseye
+            rid: debian-arm64
 
     steps:
       - uses: actions/checkout@v2.1.0
@@ -57,7 +57,6 @@ jobs:
               export DOTNET_ROOT=$HOME/.dotnet
               export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
             fi
-            export DOTNET_EnableWriteXorExecute=0
             dotnet new xunit -o TestRestoreTemp
             cd TestRestoreTemp/
             dotnet restore --runtime "${{ matrix.rid }}"
@@ -65,7 +64,6 @@ jobs:
             rm -r TestRestoreTemp/
 
           run: |
-            export DOTNET_EnableWriteXorExecute=0
             if [[ "${{ matrix.distro }}" != "fedora_latest" ]]; then
               export DOTNET_ROOT=$HOME/.dotnet
               export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
