@@ -60,6 +60,7 @@ jobs:
               export DOTNET_ROOT=$HOME/.dotnet
               export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
             fi
+            export DOTNET_EnableWriteXorExecute=0
             dotnet new xunit -o TestRestoreTemp
             cd TestRestoreTemp/
             dotnet restore --runtime "${{ matrix.rid }}"
@@ -67,6 +68,7 @@ jobs:
             rm -r TestRestoreTemp/
 
           run: |
+            export DOTNET_EnableWriteXorExecute=0
             if [[ "${{ matrix.distro }}" != "fedora_latest" ]]; then
               export DOTNET_ROOT=$HOME/.dotnet
               export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
