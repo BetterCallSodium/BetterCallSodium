@@ -20,7 +20,7 @@ jobs:
             rid: linux
 
     steps:
-      - uses: actions/checkout@v2.1.0
+      - uses: actions/checkout@v3.0.2
       
       - uses: uraimo/run-on-arch-action@v2.2.1
         name: Test
