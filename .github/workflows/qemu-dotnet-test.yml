@@ -49,6 +49,7 @@ jobs:
                 apk add curl bash icu-libs icu-data-full krb5-libs libgcc libintl libssl1.1 libstdc++ zlib libsodium
                 ;;
             esac
+            export DOTNET_EnableWriteXorExecute=0
             if [[ "${{ matrix.distro }}" != "fedora_latest" ]]; then
               curl -L -O https://dot.net/v1/dotnet-install.sh
               chmod 777 dotnet-install.sh
@@ -64,6 +65,7 @@ jobs:
             rm -r TestRestoreTemp/
 
           run: |
+            export DOTNET_EnableWriteXorExecute=0
             if [[ "${{ matrix.distro }}" != "fedora_latest" ]]; then
               export DOTNET_ROOT=$HOME/.dotnet
               export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
